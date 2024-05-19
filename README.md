@@ -1,14 +1,14 @@
 # GitCensus
 
-GitCensus is a set of tool to cache and generate statistics about your project's community. The tools use the excellent [PyGitHub library](https://github.com/PyGithub/PyGithub) to obtain GitHub information
+GitCensus is a set of tools to cache and generate statistics about your project's community. The tools use the excellent [PyGitHub library](https://github.com/PyGithub/PyGithub) to obtain GitHub information.
 
-The object with the code is to be simple and easy to understand that can by updated by people who are not experts in Python. I only dabble in Python, so please forgive anything that's not done in the correct Python way.
+The object with the code is to be simple and easy to understand so that it can by updated by people who are not experts in Python. I only dabble in Python, so please forgive anything that's not done in the correct Python way.
 
 Feedback and pull requests are welcome!
 
 # Getting started
 
-Most of the scripts work off a cache of the GitHub information so that they are quick to run, and you don't encounter issues with GitHub's request limits.
+Most of the scripts work off a cache of the GitHub information so that they are quick to run, and so you don't encounter issues with GitHub's request limits.
 
 First off you need to set up some environment variables to define what repository you will be analysing.
 ```shell
