@@ -9,7 +9,7 @@ import pickle
 import githubSetup
 
 save_every = 20 # Save to disk every X record cached
-max = 100 # Max people to read in one go
+max = 1000 # Max people to read in one go
 
 def write_files(locations, organisations):
     print("Writing files")
@@ -42,9 +42,13 @@ def cache_github():
     for person in people:
         login = person.login
         if login not in locations:
+            print(login)
             locations[login] = person.location
             belongs_to = person.get_orgs()
             organisations[login] = []
+            company = person.company
+            if company:
+                organisations[login].append(company)
             for org in belongs_to:
                 organisations[login].append(org.login)
             # Save as we go in case something goes wrong
@@ -61,4 +65,4 @@ def cache_github():
 
     print(f"All done")
 
-cache_gitgub()
+cache_github()
