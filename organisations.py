@@ -4,6 +4,8 @@
 
 import pickle
 
+from org import fix_org
+
 with open('organisations.pickle', 'rb') as file:
     organisations = pickle.load(file)
 
@@ -12,6 +14,7 @@ people = {}
 no = 0
 for person in organisations:
     for org in organisations[person]:
+        org = fix_org(org)
         if org not in orgs:
             orgs[org] = 1
         else:
