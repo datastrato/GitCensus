@@ -8,7 +8,7 @@ import pickle
 
 import githubSetup
 
-save_every = 20 # Save to disk evey X PR or issues cached
+save_every = 20 # Save to disk every X PR or issues cached
 skip_cached = False # Skip re-reding any issues and PRs
 skip_closed = True # Skip re-reding closed issues and PRs
 
