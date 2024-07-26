@@ -19,6 +19,6 @@ for stargazer in stargazers:
     week = int(stargazer.starred_at.strftime("%W"))
     weeks[week] = weeks[week] + 1
 
-for i in range(53):
+for i in range(54):
     print(f"{i+1},{weeks[i]}")
 

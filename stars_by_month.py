@@ -23,6 +23,6 @@ for stargazer in stargazers:
     month = stargazer.starred_at.month - 1
     months[month] = months[month] + 1
 
-for i in range(11):
+for i in range(12):
     month = datetime.date(1900, i+1, 1).strftime('%b')
     print(f'{month},{months[i]}')
