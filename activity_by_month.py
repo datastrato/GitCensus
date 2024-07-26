@@ -1,5 +1,5 @@
 #
-# Work out all users activity week by week
+# Work out all users activity month by month
 # The calculations assume 10 points for a PR, 3 points for an issue and 1 point for a comment
 #
 import pickle
