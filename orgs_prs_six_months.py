@@ -14,13 +14,10 @@ display_closed = True # display open or closed PRs
 
 def load_data():
     global prs
-    global comments_prs
     global organisations
 
     with open('prs.pickle', 'rb') as file:
         prs = pickle.load(file)
-    with open('comments_pr.pickle', 'rb') as file:
-        comments_prs = pickle.load(file)
     with open('organisations.pickle', 'rb') as file:
         organisations = pickle.load(file)
 
@@ -44,10 +41,10 @@ def orgs_prs():
             for org in organisations[login]:
                 org = fix_org(org)
                 if org in stats:
-                    stats[org] = stats[org] + diff
+                    stats[org] = stats[org] + diff.days
                     counts[org] = counts[org] + 1
                 else:
-                    stats[org] = diff
+                    stats[org] = diff.days
                     counts[org] = 1
                 if org not in people:
                     people[org] = []
@@ -70,8 +67,8 @@ orgs_prs()
 if display_closed:
     for org in closed_prs:
         orgs = '"' + str(people_closed[org]) + '"'
-        print(f'{org},{len(people_closed[org])},{closed_no[org]},{closed_prs[org].days/closed_no[org]},{orgs}')
+        print(f'{org},{len(people_closed[org])},{closed_no[org]},{closed_prs[org]/closed_no[org]},{orgs}')
 else:
     for org in open_prs:
         orgs = '"' + str(people_open[org]) + '"'
-        print(f'{org},{len(people_open[org])},{open_no[org]},{open_prs[org].days/open_no[org]},{orgs}')
+        print(f'{org},{len(people_open[org])},{open_no[org]},{open_prs[org]/open_no[org]},{orgs}')
