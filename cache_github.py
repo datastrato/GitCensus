@@ -9,8 +9,8 @@ import pickle
 import githubSetup
 
 save_every = 20 # Save to disk every X PR or issues cached
-skip_cached = False # Skip re-reding any issues and PRs
-skip_closed = True # Skip re-reding closed issues and PRs
+skip_cached = False # Skip re-reading any issues and PRs
+skip_closed = True # Skip re-reading closed issues and PRs
 
 # Don't go back further than this (default six months)
 past = datetime.date.today()
@@ -63,7 +63,7 @@ def cache_prs(newprs, oldprs, oldcomments, oldmerged):
                 if i % save_every == 0:
                     write_prs(prs, comments_pr, merged)
         else:
-            break
+            continue
         i = i + 1
 
     write_prs(prs, comments_pr, merged)
