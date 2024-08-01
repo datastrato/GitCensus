@@ -18,4 +18,6 @@ with open('locations.pickle', 'wb') as file:
     pickle.dump({}, file)
 with open('organisations.pickle', 'wb') as file:
     pickle.dump({}, file)
+with open('commits.pickle', 'wb') as file:
+    pickle.dump({}, file)
 print("All done")
