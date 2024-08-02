@@ -34,15 +34,16 @@ def cache_github():
     everyone = []
     for person in people:
         login = person.login
-        everyone.append(login)
+        everyone.append(person)
 
+    # assumes commits.pickle exist and upto date
     with open('commits.pickle', 'rb') as pickle_file:
         commits = pickle.load(pickle_file)
 
     for commit in commits:
         login = commits[commit].author._login.value
         if login not in everyone:
-            everyone.append(login)
+            everyone.append(commits[commit].author)
 
     locations = {}
     with open('locations.pickle', 'rb') as pickle_file:
@@ -52,13 +53,14 @@ def cache_github():
     with open('organisations.pickle', 'rb') as pickle_file:
         organisations = pickle.load(pickle_file)
 
-    for login in everyone:
+    for person in everyone:
+        login = person.login
         if login not in locations:
-            print(login)
             locations[login] = person.location
             belongs_to = person.get_orgs()
             organisations[login] = []
             company = person.company
+            print(f'{login} {locations[login]} {company}')
             if company:
                 organisations[login].append(company)
             for org in belongs_to:
