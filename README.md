@@ -41,7 +41,7 @@ python3 cache_github.py
 
 If you are interested in users organisations and locations run:
 ```shell
-python3 github_orgs.py
+python3 github_orgs_and_locs.py
 ```
 
 Finally you can run some script to look at the cached data:
