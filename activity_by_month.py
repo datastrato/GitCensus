@@ -11,6 +11,7 @@ def load_data():
     global comments_prs
     global issues
     global comments_issues
+    global commits
 
     with open('prs.pickle', 'rb') as file:
         prs = pickle.load(file)
@@ -20,6 +21,8 @@ def load_data():
         issues = pickle.load(file)
     with open('comments_issues.pickle', 'rb') as file:
         comments_issues = pickle.load(file)
+    with open('commits.pickle', 'rb') as pickle_file:
+        commits = pickle.load(pickle_file)
 
 months = [{},{},{},{},{},{},{},{},{},{},{},{}]
 
@@ -43,10 +46,10 @@ def pr_comment_points():
             if login not in ignore.ignore:
                 dt = pr.created_at
                 month = pr.created_at.month - 1
-            if login not in months[month]:
-                months[month][login] = 1
-            else:
-                months[month][login] = months[month][login] + 1
+                if login not in months[month]:
+                    months[month][login] = 1
+                else:
+                    months[month][login] = months[month][login] + 1
 
 def issue_points():
     for id in issues:
@@ -72,11 +75,23 @@ def issue_comment_points():
                 else:
                     months[month][login] = months[month][login] + 1
 
+def commit_points():
+    for commit in commits:
+        login = commits[commit].author._login.value
+        if login not in ignore.ignore:
+            dt = commits[commit].commit.author.date.date()
+            month = issue.created_at.month - 1
+            if login not in months[month]:
+                months[month][login] = 5
+            else:
+                months[month][login] = months[month][login] + 5
+
 load_data()
 pr_points()
 pr_comment_points()
 issue_points()
 issue_comment_points()
+commit_points()
 
 for month in months:
     print(f"Month: {month}")
