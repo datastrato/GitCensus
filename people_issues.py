@@ -16,7 +16,7 @@ def load_data():
     with open('issues.pickle', 'rb') as file:
         issues = pickle.load(file)
 
-def people_prs():
+def people_issues():
     for id in issues:
         issue = issues[id]
         login = issue.user.login
@@ -54,11 +54,11 @@ people_closed = {}
 people = {}
 
 load_data()
-people_prs()
+people_issues()
 
 if display_closed:
     for person in closed_issue:
-        print(f'{person},{closed_no[person]},{closed_issue[person]/closed_no[person]}')
+        print(f'{person},{closed_issue[person]},{closed_no[person]},{closed_issue[person]/closed_no[person]}')
 else:
     for person in open_issue:
-        print(f'{person},{open_no[person]},{open_issue[person]/open_no[person]}')
+        print(f'{person},{open_issue[person]},{open_no[person]},{open_issue[person]/open_no[person]}')
