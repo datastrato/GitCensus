@@ -32,7 +32,7 @@ export GC_LOGIN=<your GitHub login>
 export GC_PASSWORD=<your GitHub password>
 ```
 
-You then need to initial the pickle databases:
+You then need to initialise the pickle databases:
 ```shell
 python3 init_db.py
 ```
@@ -49,7 +49,7 @@ If you are interested in users organisations and locations run:
 python3 github_orgs_and_locs.py
 ```
 
-Finally you can run some script to look at the cached data:
+Finally you can run some scripts to look at the cached data:
 
 To see weekly activity on the project by contributors run:
 ```shell
@@ -68,4 +68,4 @@ python3 organisations.py
 
 # Contributions
 
-Contributions of any kind are welcome.
+Contributions to this project of any kind are welcome.
