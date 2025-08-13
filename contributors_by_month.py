@@ -15,7 +15,7 @@ for id in prs:
     login = pr.user.login
     if login not in ignore.ignore:
         month = int(pr.created_at.month) - 1
-        if pr.created_at.year == 2024:
+        if pr.created_at.year == 2025:
             if login not in people[month]:
                 people[month].append(login)
 
