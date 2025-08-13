@@ -4,7 +4,11 @@
 #
 import pickle
 
+import datetime
+
 import ignore
+
+now = datetime.date.today().year
 
 def load_data():
     global prs
@@ -19,13 +23,20 @@ def load_data():
         commits = pickle.load(pickle_file)
 
 def count_prs():
+    count = 0
     for id in prs:
         pr = prs[id]
         login = pr.user.login
         if login not in ignore.ignore:
             dt = pr.created_at
             week = dt.isocalendar()[1] - 1
-            pr_count[week] = pr_count[week] + 1
+            year = dt.year
+            if year == now:
+                print(login)
+                pr_count[week] = pr_count[week] + 1
+                count = count + 1
+    print(count)
+
 
 def count_issues():
     for id in issues:
@@ -34,7 +45,9 @@ def count_issues():
         if login not in ignore.ignore:
             dt = issue.created_at
             week = dt.isocalendar()[1] - 1
-            issue_count[week] = issue_count[week] + 1
+            year = dt.year
+            if year == now:
+                issue_count[week] = issue_count[week] + 1
 
 def count_commits():
     for commit in commits:
@@ -42,7 +55,9 @@ def count_commits():
         if login not in ignore.ignore:
             dt = commits[commit].commit.author.date.date()
             week = dt.isocalendar()[1] - 1
-            commit_count[week] = commit_count[week] + 1
+            year = dt.year
+            if year == now:
+                commit_count[week] = commit_count[week] + 1
 
 pr_count = [0]*52
 issue_count = [0]*52
