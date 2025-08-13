@@ -1,3 +1,6 @@
+#
+# Work out contribitors by week
+#
 import pickle
 from datetime import datetime
 import ignore

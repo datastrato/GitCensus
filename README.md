@@ -1,10 +1,15 @@
 # GitCensus
 
-GitCensus is a set of tool to cache and generate statistics about your project's community. The tools use the excellent [PyGitHub library](https://github.com/PyGithub/PyGithub) to obtain GitHub information
+GitCensus is a set of tool to cache and generate statistics about your project's community. The tools use the excellent [PyGitHub library](https://github.com/PyGithub/PyGithub) to obtain GitHub information.
 
 The object with the code is to be simple and easy to understand that can by updated by people who are not experts in Python. I only dabble in Python, so please forgive anything that's not done in the correct Python way.
 
 Feedback and pull requests are welcome!
+
+# Prerequisites
+
+Python 3.9
+PyGithub 2.4.0
 
 # Getting started
 
@@ -27,7 +32,7 @@ export GC_LOGIN=<your GitHub login>
 export GC_PASSWORD=<your GitHub password>
 ```
 
-You then need to initial the pickle databases:
+You then need to initialise the pickle databases:
 ```shell
 python3 init_db.py
 ```
@@ -44,7 +49,7 @@ If you are interested in users organisations and locations run:
 python3 github_orgs_and_locs.py
 ```
 
-Finally you can run some script to look at the cached data:
+Finally you can run some scripts to look at the cached data:
 
 To see weekly activity on the project by contributors run:
 ```shell
@@ -60,3 +65,7 @@ To see organisations of contributors:
 ```shell
 python3 organisations.py
 ```
+
+# Contributions
+
+Contributions to this project of any kind are welcome.
