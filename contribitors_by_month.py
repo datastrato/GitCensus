@@ -1,3 +1,6 @@
+#
+# Work out contribitors by month
+#
 import pickle
 from datetime import datetime
 import ignore
