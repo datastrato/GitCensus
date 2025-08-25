@@ -17,15 +17,15 @@ print(f"Stars: {repo.stargazers_count}")
 
 stargazers = repo.get_stargazers_with_dates()
 
-now = datetime.date.today().year
-months = [0] * 12
+start = 2020
+years = [[0] * 12 for _ in range(12)]
 
 for stargazer in stargazers:
     year = stargazer.starred_at.year
-    if year == now:
-        month = stargazer.starred_at.month - 1
-        months[month] = months[month] + 1
+    month = stargazer.starred_at.month - 1
+    years[year-start][month] = years[year-start][month] + 1
 
-for i in range(12):
-    month = datetime.date(1900, i+1, 1).strftime('%b')
-    print(f'{month},{months[i]}')
+for year in range(start, 2025):
+    for i in range(12):
+        month = datetime.date(1900, i+1, 1).strftime('%b')
+        print(f'{year},{month},{years[year-start][i]}')

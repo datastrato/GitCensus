@@ -3,8 +3,11 @@
 # The calculations assume 10 points for a PR, 3 points for an issue and 1 point for a comment
 #
 import pickle
+import datetime
 
 import ignore
+
+now = datetime.date.today().year
 
 def load_data():
     global prs
@@ -31,11 +34,13 @@ def pr_points():
         if login not in ignore.ignore:
             dt = pr.created_at
             week = dt.isocalendar()[1] - 1
-            if login not in users:
-                users[login] = [0]*52
-                users[login][week] = 5
-            else:
-                users[login][week] = users[login][week] + 5
+            year = dt.year
+            if year == now:
+                if login not in users:
+                    users[login] = [0]*52
+                    users[login][week] = 5
+                else:
+                    users[login][week] = users[login][week] + 5
 
 def pr_comment_points():
     for id in prs:
@@ -45,11 +50,13 @@ def pr_comment_points():
             if login not in ignore.ignore:
                 dt = comment.created_at
                 week = dt.isocalendar()[1] - 1
-                if login not in users:
-                    users[login] = [0]*52
-                    users[login][week] = 1
-                else:
-                    users[login][week] = users[login][week] + 1
+                year = dt.year
+                if year == now:
+                    if login not in users:
+                        users[login] = [0]*52
+                        users[login][week] = 1
+                    else:
+                        users[login][week] = users[login][week] + 1
 
 def issue_points():
     for id in issues:
@@ -58,11 +65,13 @@ def issue_points():
         if login not in ignore.ignore:
             dt = issue.created_at
             week = dt.isocalendar()[1] - 1
-            if login not in users:
-                users[login] = [0]*52
-                users[login][week] = 3
-            else:
-                users[login][week] = users[login][week] + 3
+            year = dt.year
+            if year == now:
+                if login not in users:
+                    users[login] = [0]*52
+                    users[login][week] = 3
+                else:
+                    users[login][week] = users[login][week] + 3
 
 def issue_comment_points():
     for id in issues:
@@ -71,11 +80,13 @@ def issue_comment_points():
             if login not in ignore.ignore:
                 dt = comment.created_at
                 week = dt.isocalendar()[1] - 1
-                if login not in users:
-                    users[login] = [0]*52
-                    users[login][week] = 1
-                else:
-                    users[login][week] = users[login][week] + 1
+                year = dt.year
+                if year == now:
+                    if login not in users:
+                        users[login] = [0]*52
+                        users[login][week] = 1
+                    else:
+                        users[login][week] = users[login][week] + 1
 
 def commit_points():
     for commit in commits:
@@ -83,12 +94,14 @@ def commit_points():
         if login not in ignore.ignore:
             dt = commits[commit].commit.author.date.date()
             week = dt.isocalendar()[1] - 1
-            if login not in users:
-                print(f'new user {login}')
-                users[login] = [0]*52
-                users[login][week] = 5
-            else:
-                users[login][week] = users[login][week] + 5
+            year = dt.year
+            if year == now:
+                if login not in users:
+                    print(f'new user {login}')
+                    users[login] = [0]*52
+                    users[login][week] = 5
+                else:
+                    users[login][week] = users[login][week] + 5
 
 users = {}
 

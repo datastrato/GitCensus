@@ -1,10 +1,8 @@
 #
-# Work out all stats week by week
+# Work out stats month by month
 #
 import pickle
-
 import datetime
-
 import ignore
 
 now = datetime.date.today().year
@@ -28,39 +26,44 @@ def count_prs():
         login = pr.user.login
         if login not in ignore.ignore:
             dt = pr.created_at
-            week = dt.isocalendar()[1] - 1
+            month = dt.month - 1
             year = dt.year
             if year == now:
-                print(login)
-                pr_count[week] = pr_count[week] + 1
+                pr_count[month] = pr_count[month] + 1
                 count = count + 1
-    print(count)
-
+    print(f"Total PRs this year: {count}")
 
 def count_issues():
+    count = 0
     for id in issues:
         issue = issues[id]
         login = issue.user.login
         if login not in ignore.ignore:
             dt = issue.created_at
-            week = dt.isocalendar()[1] - 1
+            month = dt.month - 1
             year = dt.year
             if year == now:
-                issue_count[week] = issue_count[week] + 1
+                issue_count[month] = issue_count[month] + 1
+                count = count + 1
+    print(f"Total Issues this year: {count}")
 
 def count_commits():
+    count = 0
     for commit in commits:
         login = commits[commit].author._login.value
         if login not in ignore.ignore:
             dt = commits[commit].commit.author.date.date()
-            week = dt.isocalendar()[1] - 1
+            month = dt.month - 1
             year = dt.year
             if year == now:
-                commit_count[week] = commit_count[week] + 1
+                commit_count[month] = commit_count[month] + 1
+                count = count + 1
+    print(f"Total Commits this year: {count}")
 
-pr_count = [0]*52
-issue_count = [0]*52
-commit_count = [0]*52
+# Arrays for each month (Jan–Dec = 12 slots)
+pr_count = [0]*12
+issue_count = [0]*12
+commit_count = [0]*12
 
 load_data()
 count_prs()
@@ -68,5 +71,5 @@ count_issues()
 count_commits()
 
 print("Month,PRs,Issues,Commits")
-for no in range(52):
-    print(f"{pr_count[no]},{issue_count[no]},{commit_count[no]}")
+for no in range(12):
+    print(f"{no+1},{pr_count[no]},{issue_count[no]},{commit_count[no]}")
