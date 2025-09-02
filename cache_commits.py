@@ -22,23 +22,23 @@ def write_commits(commmits):
 
 def cache_commits(newcommits, oldcommits):
     commits = oldcommits
-    i = 0
 
     print(f'{newcommits.totalCount} new commits')
 
     for commit in newcommits:
         dt = commit.commit.author.date.date()
         if dt > past:
-            name = commit.author._login.value
+            if commit.author is not None:
+                name = commit.author.login
+            else:
+                name = commit.commit.author.name
+
             sha = commit.sha
             if skip_cached and sha in oldcommits:
                 print(f"{sha} by {name} skipped")
             else:
                 print(f"{sha} by {name} updated")
                 commits[sha] = commit
-        else:
-            continue
-        i = i + 1
 
     write_commits(commits)
 
