@@ -74,6 +74,7 @@ def issue_points():
 
 def issue_comment_points():
     for id in issues:
+        issue = issues[id]
         for comment in comments_issues[id]:
             login = comment.user.login
             if login not in ignore.ignore:
@@ -91,11 +92,13 @@ def commit_points():
         login = commits[commit].author._login.value
         if login not in ignore.ignore:
             dt = commits[commit].commit.author.date.date()
-            month = issue.created_at.month - 1
-            if login not in months[month]:
-                months[month][login] = 5
-            else:
-                months[month][login] = months[month][login] + 5
+            month = dt.month - 1
+            year = dt.year
+            if year == now:
+                if login not in months[month]:
+                    months[month][login] = 5
+                else:
+                    months[month][login] = months[month][login] + 5
 
 load_data()
 pr_points()
